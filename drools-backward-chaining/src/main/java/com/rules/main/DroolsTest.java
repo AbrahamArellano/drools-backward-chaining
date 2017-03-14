@@ -17,11 +17,14 @@ public class DroolsTest {
 		AssociatePersonClaim apc1 = new AssociatePersonClaim("cl1", "ap1", 10);
 		AssociatePersonClaim apc2 = new AssociatePersonClaim("cl1", "ap2", 20);
 		AssociatePersonClaim apc3 = new AssociatePersonClaim("cl1", "ap3", 30);
+		AssociatePersonClaim apc4 = new AssociatePersonClaim("cl1", "ap3", 30);
 		Claim cl = new Claim("cl1");
 		
 		ksession.insert(apc1);
 		ksession.insert(apc2);
 		ksession.insert(apc3);
+		ksession.insert(apc3);
+		ksession.insert(apc4);
 		ksession.insert(cl);
 
 		ksession.fireAllRules();

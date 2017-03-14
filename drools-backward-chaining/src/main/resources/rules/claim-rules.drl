@@ -2,20 +2,39 @@ package rules
  
 import com.rules.model.Claim;
 import com.rules.model.AssociatePersonClaim;
+import java.util.Set
 import java.util.List
 
 dialect  "mvel"
 
-query associatedClaimsQuery(Claim claimIn, List associatedPersonClaims) 
-    associatedPersonClaims := List() from acc( $asocElem := AssociatePersonClaim(claimIn.claimId, $apcId; ),
+query associatedClaimsQuery(Claim claimIn, Integer threshold, Set associatedPersonClaims) 
+    associatedPersonClaims := Set() from acc( $asocElem := AssociatePersonClaim(claimIn.claimId, $apcId; value > threshold),
+                                   collectSet( $asocElem ) )
+end
+
+query associatedClaimsQueryList(Claim claimIn, Integer threshold, List associatedPersonClaims) 
+    associatedPersonClaims := List() from acc( $asocElem := AssociatePersonClaim(claimIn.claimId, $apcId; value > threshold),
                                    collectList( $asocElem ) )
 end
 
 rule "associatedClaimsRule"
 when                            
     $claim := Claim(claimId == "cl1")
-    associatedClaimsQuery($claim, associatedPersonClaimsRef;)                            
+    associatedClaimsQuery($claim, 25, associatedPersonClaimsRef;)                            
 then
+	System.out.println("********** SET **********");
     System.out.println( "we reach this point: " + $claim );
     System.out.println( "List of associated: " + associatedPersonClaimsRef);
+    System.out.println("*************************");
+end
+
+rule "associatedClaimsRuleList"
+when                            
+    $claim := Claim(claimId == "cl1")
+    associatedClaimsQueryList($claim, 25, associatedPersonClaimsRef;)                            
+then
+	System.out.println("********** LIST **********");
+    System.out.println( "we reach this point: " + $claim );
+    System.out.println( "List of associated: " + associatedPersonClaimsRef);
+    System.out.println("*************************");
 end
