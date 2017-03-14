@@ -1,12 +1,24 @@
 package com.rules.model;
 
+import org.kie.api.definition.type.Position;
+
 public class AssociatePersonClaim {
 
+	@Position(0)
+	private String mainCid;
+	
+	@Position(1)
 	private String apcId;
 	
-	private String privateId;
-	
+	@Position(2)
 	private int value;
+	
+	public AssociatePersonClaim(String mainCid, String apcId, int value) {
+		super();
+		this.apcId = apcId;
+		this.mainCid = mainCid;
+		this.value = value;
+	}
 
 	public String getApcId() {
 		return apcId;
@@ -16,12 +28,12 @@ public class AssociatePersonClaim {
 		this.apcId = apcId;
 	}
 
-	public String getPrivateId() {
-		return privateId;
+	public String getMainCid() {
+		return mainCid;
 	}
 
-	public void setPrivateId(String privateId) {
-		this.privateId = privateId;
+	public void setMainCid(String mainCid) {
+		this.mainCid = mainCid;
 	}
 
 	public int getValue() {
@@ -37,7 +49,7 @@ public class AssociatePersonClaim {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((apcId == null) ? 0 : apcId.hashCode());
-		result = prime * result + ((privateId == null) ? 0 : privateId.hashCode());
+		result = prime * result + ((mainCid == null) ? 0 : mainCid.hashCode());
 		result = prime * result + value;
 		return result;
 	}
@@ -56,10 +68,10 @@ public class AssociatePersonClaim {
 				return false;
 		} else if (!apcId.equals(other.apcId))
 			return false;
-		if (privateId == null) {
-			if (other.privateId != null)
+		if (mainCid == null) {
+			if (other.mainCid != null)
 				return false;
-		} else if (!privateId.equals(other.privateId))
+		} else if (!mainCid.equals(other.mainCid))
 			return false;
 		if (value != other.value)
 			return false;
@@ -68,7 +80,7 @@ public class AssociatePersonClaim {
 
 	@Override
 	public String toString() {
-		return "AssociatePersonClaim [apcId=" + apcId + ", privateId=" + privateId + ", value=" + value + "]";
+		return "AssociatePersonClaim [apcId=" + apcId + ", mainCid=" + mainCid + ", value=" + value + "]";
 	}
 
 	

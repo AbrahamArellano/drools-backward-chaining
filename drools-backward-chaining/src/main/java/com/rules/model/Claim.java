@@ -1,9 +1,19 @@
 package com.rules.model;
 
+import org.kie.api.definition.type.Position;
+
 public class Claim {
 
+	@Position(0)
 	private String claimId;
+	
 
+	public Claim(String claimId) {
+		super();
+		this.claimId = claimId;
+	}
+
+	
 	public String getClaimId() {
 		return claimId;
 	}

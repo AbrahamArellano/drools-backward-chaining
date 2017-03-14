@@ -1,0 +1,21 @@
+package rules
+ 
+import com.rules.model.Claim;
+import com.rules.model.AssociatePersonClaim;
+import java.util.List
+
+dialect  "mvel"
+
+query associatedClaimsQuery(Claim claimIn, List associatedPersonClaims) 
+    associatedPersonClaims := List() from acc( $asocElem := AssociatePersonClaim(claimIn.claimId, $apcId; ),
+                                   collectList( $asocElem ) )
+end
+
+rule "associatedClaimsRule"
+when                            
+    $claim := Claim(claimId == "cl1")
+    associatedClaimsQuery($claim, associatedPersonClaimsRef;)                            
+then
+    System.out.println( "we reach this point: " + $claim );
+    System.out.println( "List of associated: " + associatedPersonClaimsRef);
+end
