@@ -15,8 +15,8 @@ public class DroolsTest {
 		KieSession ksession = kContainer.newKieSession("ksession-rule");
 
 		AssociatePersonClaim apc1 = new AssociatePersonClaim("cl1", "ap1", 10);
-		AssociatePersonClaim apc2 = new AssociatePersonClaim("cl1", "ap2", 10);
-		AssociatePersonClaim apc3 = new AssociatePersonClaim("cl1", "ap3", 10);
+		AssociatePersonClaim apc2 = new AssociatePersonClaim("cl1", "ap2", 20);
+		AssociatePersonClaim apc3 = new AssociatePersonClaim("cl1", "ap3", 30);
 		Claim cl = new Claim("cl1");
 		
 		ksession.insert(apc1);
